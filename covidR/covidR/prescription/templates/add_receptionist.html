@@ -1,0 +1,43 @@
+{% include 'base.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+
+{% comment %} {% ifequal error "no" %}
+<script>
+    alert('Record Saved Sucessfully');
+    window.location = "{% url 'view_receptionist' %}";
+</script>
+{% endifequal %} {% endcomment %}
+
+<div class="container">
+    <h2 class="text-center">Add Receptionist</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username</label>
+        <input type="text" class="form-control" name="uname">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password">
+        <label>Address</label>
+        <input type="text" class="form-control" name="address">
+        <label>Contact</label>
+        <input type="text" class="form-control" name="contact">
+        <label>DOB</label>
+        <input type="text" class="form-control" name="dob">
+        <label>Gender</label>
+        <input type="text" class="form-control" name="gender">
+        <label>Blood</label>
+        <input type="text" class="form-control" name="blood">
+
+
+        <input type="submit" value="Add" class="form-control btn btn-primary">
+    </form>
+
+</div>
+
+{% endblock content %}
+{% include 'footer.html' %}

@@ -3,7 +3,7 @@ from msilib.schema import ListView
 from multiprocessing import context
 from urllib import request
 from django.shortcuts import render, redirect
-from django.views.generic import View, TemplateView, FormView, DetailView, ListView
+from django.views.generic import View, TemplateView, FormView, DetailView, ListView, CreateView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import *
@@ -92,3 +92,75 @@ class ReceptionistLogoutView(View):
     def get(self,request):
         logout(request)
         return redirect("prescription:receptionistlogin")
+
+def About(request):
+     return render(request, 'about.html')
+
+def Home(request):
+     return render(request, 'home.html')
+
+def Contact(request):
+    return render(request, 'contact.html')
+
+# def add_patient(request):
+#     return render(request, 'add_patient.html')
+
+# def view_patient(request):
+#     return render(request, 'view_patient.html')
+
+class AddPatient(DoctorRequiredMixin, CreateView):
+    template_name = "add_patient.html"
+    form_class = PatientForm
+    success_url = reverse_lazy("prescription:doctordashboard")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+    def form_valid(self, form):
+
+        form.save()
+            
+        return super().form_valid(form)
+
+class ManageCompareView(DoctorRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        cp_id = self.kwargs["cp_id"]
+        action = request.GET.get("action")
+        cp_obj = Patient.objects.get(id=cp_id)
+        
+       
+        if action == "rmv":
+            
+            cp_obj.delete()
+           
+        else:
+            pass
+ 
+        return redirect("prescription:viewpatient")
+
+class ViewPatient(DoctorRequiredMixin, TemplateView):
+    template_name = "view_patient.html"
+ 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        patient = Patient.objects.all()
+        context['patient'] = patient
+        return context
+
+
+# class AddPatientReception(ReceptionistRequiredMixin, CreateView):
+#     template_name = "add_patient_reception.html"
+#     form_class = PatientForm
+#     success_url = reverse_lazy("prescription:receptiondashboard")
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
+    
+#     def form_valid(self, form):
+
+#         form.save()
+            
+#         return super().form_valid(form)
+

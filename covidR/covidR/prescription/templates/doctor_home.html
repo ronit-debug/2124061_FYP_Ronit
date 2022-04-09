@@ -1,34 +1,20 @@
-<<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
 
-        <h1> Doctor Home </h1>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        {% if request.user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link">Welcome {{request.user.username}}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'prescription:doctorlogout' %}">Logout</a>
-        </li>
-        {% endif %}
 
-        
-        <script src="" async defer></script>
-    </body>
+ 
+{% include 'base.html' %}
+{% include 'doctor_nav.html' %}
 
-</html>
+<h1> Admin Dashboard </h1>
+
+
+{% if request.user.is_authenticated %}
+<li class="nav-item">
+    <a class="nav-link">Welcome {{request.user.username}}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'prescription:doctorlogout' %}">Logout</a>
+</li>
+{% endif %}
+
+{% block content %}
+{% endblock content %}
