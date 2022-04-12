@@ -16,22 +16,24 @@ class PatientForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Order By"
+                "placeholder": "Full Name"
             }),
             "email": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Enter your Shipping Address"
+                "placeholder": "Enter your E-mail"
             }),
             "address": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Enter your Mobile Number"
+                "placeholder": "Enter your Address"
             }),
             "contact": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Enter your email"
+                "placeholder": "Enter your mobile number"
             }),
             "dob": forms.TextInput(attrs={
-                "class": "form-control"
+                "class": "form-control",
+                "placeholder": "Enter your date of birth"
+                
                
             }),
              "gender": forms.Select(attrs={

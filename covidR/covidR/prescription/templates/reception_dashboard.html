@@ -1,10 +1,7 @@
-
-
- 
 {% include 'base.html' %}
-{% include 'doctor_nav.html' %}
+{% include 'reception_nav.html' %}
 
-<h1> Doctor Dashboard </h1>
+<h1> Reception Dashboard </h1>
 
 
 {% if request.user.is_authenticated %}
@@ -12,7 +9,7 @@
     <a class="nav-link">Welcome {{request.user.username}}</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'prescription:doctorlogout' %}">Logout</a>
+    <a class="nav-link" href="{% url 'prescription:receptionistlogout' %}">Logout</a>
 </li>
 {% endif %}
 

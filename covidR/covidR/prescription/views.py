@@ -85,7 +85,7 @@ class ReceptionistRequiredMixin(object):
 
 #class of receptionisthome 
 class receptionist_dashboard(ReceptionistRequiredMixin, TemplateView):
-    template_name = 'receptionist_home.html'
+    template_name = 'reception_dashboard.html'
 
 #class for receptionist logout
 class ReceptionistLogoutView(View):
@@ -149,18 +149,42 @@ class ViewPatient(DoctorRequiredMixin, TemplateView):
         return context
 
 
-# class AddPatientReception(ReceptionistRequiredMixin, CreateView):
-#     template_name = "add_patient_reception.html"
-#     form_class = PatientForm
-#     success_url = reverse_lazy("prescription:receptiondashboard")
+class AddPatientReception(ReceptionistRequiredMixin, CreateView):
+    template_name = "add_patient_reception.html"
+    form_class = PatientForm
+    success_url = reverse_lazy("prescription:receptionistdashboard")
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
     
-#     def form_valid(self, form):
+    def form_valid(self, form):
 
-#         form.save()
+        form.save()
             
-#         return super().form_valid(form)
+        return super().form_valid(form)
 
+class RecepManageCompareView(ReceptionistRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        cp_id = self.kwargs["cp_id"]
+        action = request.GET.get("action")
+        cp_obj = Patient.objects.get(id=cp_id)
+        
+       
+        if action == "rmv":
+            
+            cp_obj.delete()
+           
+        else:
+            pass
+ 
+        return redirect("prescription:recepviewpatient")
+
+class ViewPatientReception(ReceptionistRequiredMixin, TemplateView):
+    template_name = "view_patient_reception.html"
+ 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        patient = Patient.objects.all()
+        context['patient'] = patient
+        return context
