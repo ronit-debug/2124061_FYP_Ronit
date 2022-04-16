@@ -32,13 +32,10 @@ class PatientForm(forms.ModelForm):
             }),
             "dob": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Enter your date of birth"
-                
-               
+                "placeholder": "Enter your date of birth"    
             }),
              "gender": forms.Select(attrs={
-                "class": "form-control"
-               
+                "class": "form-control"    
             }),
              "blood": forms.Select(attrs={
                 "class": "form-control"

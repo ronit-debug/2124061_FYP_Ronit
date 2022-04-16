@@ -10,6 +10,8 @@ urlpatterns = [
     path("/add-patient/", AddPatient.as_view(), name="addpatient"),
     path("/view-patient/", ViewPatient.as_view(), name="viewpatient"),
     path("manage-compare/<int:cp_id>/", ManageCompareView.as_view(), name="managecompare"),
+    path("patient/<int:id>/", PatientDetailView.as_view(),name="patientdetail"),
+    path('patient/<int:id>/update/', UpdatePatient.as_view(), name='update'),
 
     path("receptionistdashboard/", receptionist_dashboard.as_view(), name="receptionistdashboard"),
     path("receptionistlogin/", ReceptionistLoginView.as_view(),name="receptionistlogin"),

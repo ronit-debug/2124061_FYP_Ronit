@@ -2,8 +2,8 @@ from django.shortcuts import render
 from msilib.schema import ListView
 from multiprocessing import context
 from urllib import request
-from django.shortcuts import render, redirect
-from django.views.generic import View, TemplateView, FormView, DetailView, ListView, CreateView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import View, TemplateView, FormView, DetailView, ListView, CreateView, UpdateView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import *
@@ -147,6 +147,34 @@ class ViewPatient(DoctorRequiredMixin, TemplateView):
         patient = Patient.objects.all()
         context['patient'] = patient
         return context
+
+class PatientDetailView(DoctorRequiredMixin, DetailView):
+    template_name = "patient_detail.html"
+    # model = Patient
+    # context_object_name = "patient_obj"
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Patient, id=id_)
+
+class UpdatePatient(DoctorRequiredMixin, UpdateView):
+    template_name = "add_patient.html"
+    form_class = PatientForm
+    success_url = reverse_lazy("prescription:viewpatient")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Patient, id=id_)
+        
+    def form_valid(self, form):
+
+        form.save()
+            
+        return super().form_valid(form)
 
 
 class AddPatientReception(ReceptionistRequiredMixin, CreateView):
