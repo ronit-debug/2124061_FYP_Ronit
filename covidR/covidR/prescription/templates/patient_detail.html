@@ -32,7 +32,7 @@
                 <td>{{object.dob}}</td>
                 <td>{{object.gender}}</td>
                 <td>{{object.blood}}</td>
-                {% comment %} <td><a href="{% url'prescription:update' %}" onclick="return confirm('Confirm Changes')" class="btn btn-info">Update</a></td> {% endcomment %}
+                <td><a href="update" onclick="return confirm('Confirm Changes')" class="btn btn-info">Update</a></td>
                 
             </tr>
             {% comment %} {% endfor %} {% endcomment %}
@@ -41,6 +41,8 @@
 
 
     </table>
+    <h2>prescription</h2>
+    {{object.prescription}}
         
 </div>
 

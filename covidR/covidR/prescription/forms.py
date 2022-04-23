@@ -12,7 +12,7 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ["name", "email",
-                  "address", "contact", "dob", "gender", "blood"]
+                  "address", "contact", "dob", "gender", "blood", "prescription"]
         widgets = {
             "name": forms.TextInput(attrs={
                 "class": "form-control",
@@ -38,6 +38,10 @@ class PatientForm(forms.ModelForm):
                 "class": "form-control"    
             }),
              "blood": forms.Select(attrs={
+                "class": "form-control"
+               
+            }),
+              "prescription": forms.TextInput(attrs={
                 "class": "form-control"
                
             }),

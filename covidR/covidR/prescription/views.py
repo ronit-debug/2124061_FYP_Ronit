@@ -13,6 +13,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
+# import tensorflow as tf
+# from tensorflow import keras
 # from keras.models import load_model
 # from django.core.files.storage import FileSystemStorage
 # import cv2,os
@@ -228,17 +230,11 @@ class ViewPatientReception(ReceptionistRequiredMixin, TemplateView):
 #         fs=FileSystemStorage()
 #         filePathName = fs.save(fileObj.name,fileObj)
 #         filePathName = fs.url(filePathName)
-#         model = load_model(r"C:\Users\user\OneDrive - University of Wolverhampton\fyp\final\model\resnet_covid.h5")
+#         model = load_model(r"D:\2124061_FYP_Ronit\covidR\covidR\AIModels\resnet_covid.h5")
 
 
 #         test_image = "."+filePathName
 #         print("test_image =",test_image)
-#         # img = image.load_img(test_image,target_size=(224,224,3))
-#         # img = np.array(img, dtype='float32')
-#         # print(img.shape)
-#         # # img = image.img_to_array(img)
-#         # img = img/255
-#         # print(img.shape)
 
 #         img = cv2.imread(os.path.join(test_image))
 #         print("type of image : ",type(img))
@@ -248,11 +244,10 @@ class ViewPatientReception(ReceptionistRequiredMixin, TemplateView):
 #         img = img.reshape(1,224,224,3)
 #         print(img.shape)
 #         img = np.array(img, dtype='float32')
-#         # with model_graph.as_default():
-#         # with tf_session.as_default():
+
 #         y_pred = model.predict(img, workers=0)
 #         y_pred = np.where(y_pred>0.70, 'COVID positive','COVID negative')
-#         # prediction = labels[str(np.argmax(proba[0]))]
+
 
 #         context={
 #         "filePathName":filePathName,

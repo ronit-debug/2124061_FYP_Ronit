@@ -56,7 +56,7 @@ class Patient(models.Model):
     dob = models.DateField('Date of Birth')
     gender = models.CharField('Gender',max_length = 20, choices=GENDER)
     blood = models.CharField('Blood',max_length = 10,choices=BLOOD)
-    prescription = models.TextField('Patient', null=True, blank=True)
+    prescription = models.TextField('Prescription', null=True, blank=True)
 
     def __str__(self):
         return self.name
