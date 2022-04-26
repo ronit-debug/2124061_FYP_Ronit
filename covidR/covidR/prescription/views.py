@@ -52,6 +52,11 @@ class DoctorRequiredMixin(object):
 #class of doctorhome 
 class doctor_dashboard(DoctorRequiredMixin, TemplateView):
     template_name = 'doctor_home.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        patient = Patient.objects.all()
+        context['patient'] = patient
+        return context
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context['product_list'] = Product.objects.all().order_by("-id")[:8]
